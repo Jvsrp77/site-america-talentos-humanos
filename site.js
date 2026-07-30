@@ -28,6 +28,26 @@ function updatePageChrome() {
 window.addEventListener("scroll", updatePageChrome, { passive: true });
 updatePageChrome();
 
+function animateCounters() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("[data-count-to]").forEach((el) => {
+    const target = Number(el.dataset.countTo);
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    if (reduceMotion) { el.textContent = `${prefix}${target}${suffix}`; return; }
+    const duration = 1100;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - (1 - progress) ** 3;
+      el.textContent = `${prefix}${Math.round(target * eased)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+animateCounters();
+
 function configureExternalServices() {
   const organization = siteConfig.organization || {};
   const structuredData = { "@context": "https://schema.org", "@type": "Organization", name: organization.name || "América Talentos Humanos", description: organization.description };

@@ -62,6 +62,22 @@
 /* Service card icons (inline SVG) */
 .service-icon svg{width:26px;height:26px}
 .talent-node{white-space:nowrap;letter-spacing:-.2px;padding:0 2px}
+.intel-float>i svg{width:16px;height:16px}
+.signal-card>i svg{width:18px;height:18px}
+.journey-card>i svg{width:22px;height:22px}
+.cost-result>i svg{width:26px;height:26px}
+
+/* Button arrow micro-interaction */
+.button span{display:inline-block;transition:transform .25s ease}
+.button:hover span{transform:translate(3px,-2px)}
+.text-link span{display:inline-block;transition:transform .25s ease}
+.text-link:hover span{transform:translateX(3px)}
+
+/* Insight card color accents */
+.insight-card{border-top:3px solid transparent}
+.insight-card:nth-child(2){border-top-color:#ffc9ab}
+.insight-card:nth-child(3){border-top-color:#a9c6e0}
+.insight-main{border-top-color:transparent}
 
 /* Dashboard empty state */
 .chart-empty{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;margin:20px auto;max-width:220px;color:#8493a4;font-size:11px;line-height:1.5}

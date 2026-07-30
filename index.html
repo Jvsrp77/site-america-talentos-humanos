@@ -69,8 +69,8 @@
             <button class="button button-ghost" type="button" data-open="candidato">Quero fazer parte <span aria-hidden="true">→</span></button>
           </div>
           <div class="hero-proof hero-proof-next">
-            <div><strong>+20</strong><span>anos conectando pessoas</span></div>
-            <div><strong>360°</strong><span>leitura do negócio</span></div>
+            <div><strong data-count-to="20" data-prefix="+">+0</strong><span>anos conectando pessoas</span></div>
+            <div><strong data-count-to="360" data-suffix="°">0°</strong><span>leitura do negócio</span></div>
             <div><strong id="hero-job-count">Ativo</strong><span>banco de oportunidades</span></div>
           </div>
         </div>
@@ -85,8 +85,8 @@
             </div>
             <div class="intelligence-stats"><article><span>01</span><strong>Contexto</strong><small>Entender antes de buscar</small></article><article><span>02</span><strong>Precisão</strong><small>Evidências para decidir</small></article><article><span>03</span><strong>Conexão</strong><small>Pessoas além do papel</small></article></div>
           </div>
-          <div class="intel-float intel-float-top"><i>◎</i><span><small>Curadoria especialista</small><strong>Humano no centro</strong></span></div>
-          <div class="intel-float intel-float-bottom"><i>↗</i><span><small>Visão estratégica</small><strong>Talento que evolui</strong></span></div>
+          <div class="intel-float intel-float-top"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg></i><span><small>Curadoria especialista</small><strong>Humano no centro</strong></span></div>
+          <div class="intel-float intel-float-bottom"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></i><span><small>Visão estratégica</small><strong>Talento que evolui</strong></span></div>
         </div>
       </div>
     </section>
@@ -101,9 +101,9 @@
           <p>Cada contratação é uma decisão de negócio. Por isso, traduzimos estratégia em critérios claros e encontramos quem pode realmente gerar impacto.</p>
         </article>
         <div class="signal-bento">
-          <article class="signal-card signal-card-dark reveal"><span>01</span><strong>Visão<br>de negócio</strong><p>O perfil nasce do desafio, não de uma descrição genérica.</p><i>↗</i></article>
-          <article class="signal-card signal-card-orange reveal"><span>02</span><strong>Curadoria<br>especialista</strong><p>Tecnologia acelera. Experiência humana decide.</p><i>◎</i></article>
-          <article class="signal-card signal-card-wide reveal"><div><span>03</span><strong>Processos que geram confiança</strong></div><p>Clareza para empresas. Respeito para candidatos.</p><i>→</i></article>
+          <article class="signal-card signal-card-dark reveal"><span>01</span><strong>Visão<br>de negócio</strong><p>O perfil nasce do desafio, não de uma descrição genérica.</p><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></i></article>
+          <article class="signal-card signal-card-orange reveal"><span>02</span><strong>Curadoria<br>especialista</strong><p>Tecnologia acelera. Experiência humana decide.</p><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg></i></article>
+          <article class="signal-card signal-card-wide reveal"><div><span>03</span><strong>Processos que geram confiança</strong></div><p>Clareza para empresas. Respeito para candidatos.</p><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg></i></article>
         </div>
       </div>
     </section>
@@ -180,7 +180,7 @@
             <label>Tempo estimado em aberto <output id="cost-days-output" for="cost-days">45 dias</output><input id="cost-days" type="range" min="15" max="120" step="15" value="45"></label>
             <label>Nível de criticidade <select id="cost-factor"><option value="1">Operacional · 1,00×</option><option value="1.35" selected>Crítica · 1,35×</option><option value="1.7">Estratégica · 1,70×</option></select></label>
           </div>
-          <div class="cost-result"><div><span>Exposição operacional estimada</span><strong id="cost-result-value">R$ 0</strong><small id="cost-result-caption">para 45 dias de posição em aberto</small></div><i aria-hidden="true">↗</i></div>
+          <div class="cost-result"><div><span>Exposição operacional estimada</span><strong id="cost-result-value">R$ 0</strong><small id="cost-result-caption">para 45 dias de posição em aberto</small></div><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></i></div>
           <div class="cost-chart" aria-label="Evolução estimada por tempo de vacância">
             <div class="cost-chart-head"><span>Impacto ao longo do tempo</span><span>Estimativa acumulada</span></div>
             <div class="cost-bars" id="cost-bars"></div>
@@ -224,10 +224,10 @@
       <div class="container">
         <div class="journey-heading reveal"><div><span class="eyebrow">Jornada do candidato</span><h2>Você envia. Nós analisamos com atenção.</h2></div><p>Um caminho transparente para conectar seu perfil às oportunidades certas, com respeito aos seus dados e à sua trajetória.</p></div>
         <ol class="journey-grid">
-          <li class="journey-card reveal"><span>01</span><i aria-hidden="true">✓</i><h3>Cadastro seguro</h3><p>Seu currículo entra em nossa base de talentos com a área de interesse selecionada.</p></li>
-          <li class="journey-card reveal"><span>02</span><i aria-hidden="true">◎</i><h3>Análise de perfil</h3><p>A equipe avalia experiência, competências e aderência às oportunidades disponíveis.</p></li>
-          <li class="journey-card reveal"><span>03</span><i aria-hidden="true">↗</i><h3>Conexão com vagas</h3><p>Quando houver compatibilidade, entraremos em contato para apresentar os próximos passos.</p></li>
-          <li class="journey-card reveal"><span>04</span><i aria-hidden="true">◇</i><h3>Acompanhamento humano</h3><p>Em processos ativos, você recebe orientação e comunicação ao longo das etapas.</p></li>
+          <li class="journey-card reveal"><span>01</span><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12.5l4 4 8-9"/></svg></i><h3>Cadastro seguro</h3><p>Seu currículo entra em nossa base de talentos com a área de interesse selecionada.</p></li>
+          <li class="journey-card reveal"><span>02</span><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg></i><h3>Análise de perfil</h3><p>A equipe avalia experiência, competências e aderência às oportunidades disponíveis.</p></li>
+          <li class="journey-card reveal"><span>03</span><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></i><h3>Conexão com vagas</h3><p>Quando houver compatibilidade, entraremos em contato para apresentar os próximos passos.</p></li>
+          <li class="journey-card reveal"><span>04</span><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A2 2 0 0 1 7 3.5h10A2 2 0 0 1 19 5.5v7A2 2 0 0 1 17 14.5H10.5L6.5 18v-3.5H7A2 2 0 0 1 5 12.5z"/><circle cx="9" cy="9" r=".8" fill="currentColor" stroke="none"/><circle cx="12" cy="9" r=".8" fill="currentColor" stroke="none"/><circle cx="15" cy="9" r=".8" fill="currentColor" stroke="none"/></svg></i><h3>Acompanhamento humano</h3><p>Em processos ativos, você recebe orientação e comunicação ao longo das etapas.</p></li>
         </ol>
       </div>
     </section>
