@@ -94,16 +94,25 @@ function grouped(items, field, fallback) {
   }, {})).sort((a, b) => b[1] - a[1]);
 }
 
+const EMPTY_STATE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4.5l3 2"/></svg>';
+
+function chartEmptyState(message) {
+  const wrap = document.createElement("div");
+  wrap.className = "chart-empty";
+  wrap.innerHTML = `<span class="chart-empty-icon">${EMPTY_STATE_ICON}</span><span>${message}</span>`;
+  return wrap;
+}
+
 function renderOpportunityDashboard(jobs) {
   const total = jobs.length;
-  byId("dashboard-total").textContent = String(total).padStart(2, "0");
+  byId("dashboard-total").textContent = total ? String(total).padStart(2, "0") : "—";
   const areasRoot = byId("area-bars"); const modesRoot = byId("mode-legend"); const locationsRoot = byId("location-ranking");
   areasRoot.replaceChildren(); modesRoot.replaceChildren(); locationsRoot.replaceChildren();
-  const donut = byId("mode-donut"); donut.querySelector("strong").textContent = String(total).padStart(2, "0");
+  const donut = byId("mode-donut"); donut.querySelector("strong").textContent = total ? String(total).padStart(2, "0") : "—";
   if (!total) {
-    const empty = document.createElement("p"); empty.className = "chart-empty"; empty.textContent = "Novas oportunidades serão exibidas aqui."; areasRoot.append(empty);
-    const modeEmpty = empty.cloneNode(true); modesRoot.append(modeEmpty);
-    const locationEmpty = empty.cloneNode(true); locationsRoot.append(locationEmpty);
+    areasRoot.append(chartEmptyState("As vagas publicadas aparecerão aqui, organizadas por área."));
+    modesRoot.append(chartEmptyState("As modalidades de trabalho aparecerão aqui assim que houver vagas ativas."));
+    locationsRoot.append(chartEmptyState("As localidades com mais vagas aparecerão aqui."));
     donut.style.setProperty("--donut", "#27364a 0 100%");
     return;
   }
