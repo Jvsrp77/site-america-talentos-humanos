@@ -117,6 +117,11 @@
 .footer-linkedin[hidden]{display:none!important}
 .footer-linkedin-badge{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:5px;background:var(--orange);color:white;font-size:10px;font-weight:800;font-style:normal}
 
+/* Staggered reveal cascade for card/list grids */
+.service-grid>.reveal:nth-child(2),.case-grid>.reveal:nth-child(2),.insight-grid>.reveal:nth-child(2),.journey-grid>.reveal:nth-child(2),.signal-bento>.reveal:nth-child(2){transition-delay:.08s}
+.service-grid>.reveal:nth-child(3),.case-grid>.reveal:nth-child(3),.insight-grid>.reveal:nth-child(3),.journey-grid>.reveal:nth-child(3),.signal-bento>.reveal:nth-child(3){transition-delay:.16s}
+.journey-grid>.reveal:nth-child(4){transition-delay:.24s}
+
 /* Custom scrollbar */
 html{scrollbar-color:var(--ink) #e7e9e4;scrollbar-width:thin}
 ::-webkit-scrollbar{width:11px;height:11px}
