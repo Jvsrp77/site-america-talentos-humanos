@@ -1,6 +1,6 @@
 window.AMERICA_CONFIG = Object.freeze({
   siteUrl: "",
-  whatsappNumber: "",
+  whatsappNumber: "5512982381000",
   schedulingUrl: "",
   analyticsId: "",
   privacyEmail: "",
