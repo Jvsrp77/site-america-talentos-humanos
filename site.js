@@ -136,6 +136,7 @@ function renderFeaturedJobs(jobs) {
     details.href = `vaga.html?id=${encodeURIComponent(job.id)}`;
     actions.append(details);
     card.append(content, actions);
+    attachTilt(card);
     grid.append(card);
   });
   section.hidden = false;
@@ -261,6 +262,19 @@ hero.addEventListener("pointermove", (event) => {
   hero.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
   hero.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
 });
+
+const canTilt = !reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+function attachTilt(card) {
+  if (!canTilt) return;
+  card.addEventListener("pointermove", (event) => {
+    const bounds = card.getBoundingClientRect();
+    const px = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const py = (event.clientY - bounds.top) / bounds.height - 0.5;
+    card.style.transform = `translateY(-6px) perspective(700px) rotateX(${(-py * 6).toFixed(2)}deg) rotateY(${(px * 6).toFixed(2)}deg) scale(1.015)`;
+  });
+  card.addEventListener("pointerleave", () => { card.style.transform = ""; });
+}
+document.querySelectorAll(".service-card, .case-card, .signal-card, .insight-card").forEach(attachTilt);
 
 function openModal(modal) {
   if (!modal) return;

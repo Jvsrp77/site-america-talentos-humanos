@@ -8,3 +8,15 @@
 .not-found-icon{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(255,107,44,.14);color:var(--orange);margin:-8px 0 22px}
 .not-found-icon svg{width:22px;height:22px}
 .jobs-filters label span svg{width:15px;height:15px}
+.detail-share-actions{display:flex;align-items:center;gap:14px}
+.share-icon-link{display:inline-flex;color:var(--ink);opacity:.6;transition:opacity .2s,color .2s}
+.share-icon-link:hover{opacity:1;color:var(--orange)}
+.share-icon-link svg{width:16px;height:16px}
+
+/* Print-friendly job detail page */
+@media print{
+  .site-header,.detail-back,.detail-sidebar,.simple-footer,.back-to-top,.quick-contact,.cookie-consent{display:none!important}
+  .detail-hero{background:none!important;color:var(--ink)!important;padding:0 0 20px;min-height:auto}
+  .detail-layout{grid-template-columns:1fr}
+  body{background:white}
+}
