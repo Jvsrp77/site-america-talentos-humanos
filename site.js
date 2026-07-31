@@ -18,32 +18,38 @@ const byId = (id) => document.getElementById(id);
 const header = document.querySelector(".site-header");
 const progressBar = document.querySelector(".scroll-progress i");
 const hero = document.querySelector(".hero");
+const backToTop = byId("back-to-top");
 
 function updatePageChrome() {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
   const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
   progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
   header.classList.toggle("is-scrolled", window.scrollY > 24);
+  if (backToTop) backToTop.hidden = window.scrollY < 800;
 }
 window.addEventListener("scroll", updatePageChrome, { passive: true });
 updatePageChrome();
 
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function animateNumber(el, to, { duration = 900, prefix = "", suffix = "", pad = 0 } = {}) {
+  const format = (value) => `${prefix}${String(value).padStart(pad, "0")}${suffix}`;
+  if (reduceMotion) { el.textContent = format(to); el.dataset.value = String(to); return; }
+  const from = Number(el.dataset.value || 0);
+  const start = performance.now();
+  function tick(now) {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - (1 - progress) ** 3;
+    el.textContent = format(Math.round(from + (to - from) * eased));
+    if (progress < 1) requestAnimationFrame(tick);
+    else el.dataset.value = String(to);
+  }
+  requestAnimationFrame(tick);
+}
+
 function animateCounters() {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.querySelectorAll("[data-count-to]").forEach((el) => {
-    const target = Number(el.dataset.countTo);
-    const prefix = el.dataset.prefix || "";
-    const suffix = el.dataset.suffix || "";
-    if (reduceMotion) { el.textContent = `${prefix}${target}${suffix}`; return; }
-    const duration = 1100;
-    const start = performance.now();
-    function tick(now) {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - (1 - progress) ** 3;
-      el.textContent = `${prefix}${Math.round(target * eased)}${suffix}`;
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
+    animateNumber(el, Number(el.dataset.countTo), { duration: 1100, prefix: el.dataset.prefix || "", suffix: el.dataset.suffix || "" });
   });
 }
 animateCounters();
@@ -60,8 +66,11 @@ function configureExternalServices() {
   const schema = document.createElement("script"); schema.type = "application/ld+json"; schema.textContent = JSON.stringify(structuredData); document.head.append(schema);
   if (siteConfig.whatsappNumber) { const link=byId("quick-whatsapp");const digits=String(siteConfig.whatsappNumber).replace(/\D/g,"");link.href=`https://wa.me/${digits}?text=${encodeURIComponent("Olá! Gostaria de conversar com a América Talentos Humanos.")}`;link.hidden=false; }
   if (siteConfig.schedulingUrl) { const link=byId("quick-schedule");link.href=siteConfig.schedulingUrl;link.hidden=false; }
+  if (organization.linkedInUrl) { const link=byId("footer-linkedin");link.href=organization.linkedInUrl;link.hidden=false; }
 }
 configureExternalServices();
+
+backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
 
 // Cookies não essenciais (Google Analytics) só carregam após consentimento (LGPD).
 const COOKIE_CONSENT_KEY = "america_cookie_consent";
@@ -98,13 +107,39 @@ function setupCookieConsent() {
 setupCookieConsent();
 
 async function loadPublicSignals() {
-  const { data: jobs, error } = await supabaseClient.from("vagas").select("area,modalidade,cidade").eq("ativa", true);
-  if (error) { renderOpportunityDashboard([]); byId("dashboard-status").textContent = "O painel será atualizado quando o módulo de vagas estiver disponível."; return; }
+  const { data: jobs, error } = await supabaseClient.from("vagas").select("id,titulo,resumo,area,modalidade,cidade,created_at").eq("ativa", true).order("created_at", { ascending: false });
+  if (error) { renderOpportunityDashboard([]); renderFeaturedJobs([]); byId("dashboard-status").textContent = "O painel será atualizado quando o módulo de vagas estiver disponível."; return; }
   const count = jobs?.length || 0;
-  if (count > 0) byId("hero-job-count").textContent = String(count).padStart(2, "0");
+  if (count > 0) animateNumber(byId("hero-job-count"), count, { pad: 2 });
   renderOpportunityDashboard(jobs || []);
+  renderFeaturedJobs((jobs || []).slice(0, 3));
 }
 loadPublicSignals();
+
+function renderFeaturedJobs(jobs) {
+  const section = byId("featured-jobs"); const grid = byId("featured-jobs-grid");
+  if (!section || !grid) return;
+  if (!jobs.length) { section.hidden = true; return; }
+  grid.replaceChildren();
+  jobs.forEach((job) => {
+    const card = document.createElement("article"); card.className = "job-card";
+    const content = document.createElement("div");
+    const meta = document.createElement("div"); meta.className = "job-meta";
+    [job.area || "Oportunidade", job.modalidade || "A combinar", job.cidade || "Local a definir"].forEach((text) => {
+      const span = document.createElement("span"); span.textContent = text; meta.append(span);
+    });
+    const title = document.createElement("h3"); title.textContent = job.titulo;
+    const summary = document.createElement("p"); summary.textContent = job.resumo || "Conheça os detalhes desta oportunidade.";
+    content.append(meta, title, summary);
+    const actions = document.createElement("div"); actions.className = "job-card-actions";
+    const details = document.createElement("a"); details.className = "button button-ghost-dark"; details.textContent = "Ver detalhes";
+    details.href = `vaga.html?id=${encodeURIComponent(job.id)}`;
+    actions.append(details);
+    card.append(content, actions);
+    grid.append(card);
+  });
+  section.hidden = false;
+}
 
 function grouped(items, field, fallback) {
   return Object.entries(items.reduce((result, item) => {
@@ -125,10 +160,11 @@ function chartEmptyState(message) {
 
 function renderOpportunityDashboard(jobs) {
   const total = jobs.length;
-  byId("dashboard-total").textContent = total ? String(total).padStart(2, "0") : "—";
+  const totalEl = byId("dashboard-total"); const donut = byId("mode-donut"); const donutStrong = donut.querySelector("strong");
+  if (total) { animateNumber(totalEl, total, { pad: 2 }); animateNumber(donutStrong, total, { pad: 2 }); }
+  else { totalEl.textContent = "—"; donutStrong.textContent = "—"; }
   const areasRoot = byId("area-bars"); const modesRoot = byId("mode-legend"); const locationsRoot = byId("location-ranking");
   areasRoot.replaceChildren(); modesRoot.replaceChildren(); locationsRoot.replaceChildren();
-  const donut = byId("mode-donut"); donut.querySelector("strong").textContent = total ? String(total).padStart(2, "0") : "—";
   if (!total) {
     areasRoot.append(chartEmptyState("As vagas publicadas aparecerão aqui, organizadas por área."));
     modesRoot.append(chartEmptyState("As modalidades de trabalho aparecerão aqui assim que houver vagas ativas."));

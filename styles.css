@@ -84,6 +84,39 @@
 .chart-empty-icon{width:34px;height:34px;border-radius:50%;background:#f2f4f0;color:#a7b0bd;display:grid;place-items:center;flex-shrink:0}
 .chart-empty-icon svg{width:17px;height:17px}
 
+/* Skeleton loading */
+@keyframes skeletonPulse{0%,100%{opacity:.45}50%{opacity:1}}
+.skeleton-bars{display:grid;gap:14px;padding:4px 0}
+.skeleton-bars i{display:block;height:10px;border-radius:6px;background:#e3e6e0;animation:skeletonPulse 1.4s ease-in-out infinite}
+.skeleton-bars i:nth-child(1){width:88%}
+.skeleton-bars i:nth-child(2){width:64%;animation-delay:.15s}
+.skeleton-bars i:nth-child(3){width:46%;animation-delay:.3s}
+.skeleton-rows{display:grid;gap:11px;padding:4px 0}
+.skeleton-rows i{display:block;height:14px;border-radius:6px;background:#e3e6e0;animation:skeletonPulse 1.4s ease-in-out infinite}
+.skeleton-rows i:nth-child(2){animation-delay:.15s}
+.skeleton-rows i:nth-child(3){animation-delay:.3s}
+.skeleton-rows-sm i{height:10px}
+
+/* Featured jobs preview (home) */
+.featured-jobs{margin-top:46px}
+.featured-jobs[hidden]{display:none!important}
+.featured-jobs-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.featured-jobs-head h3{font-family:var(--display);font-size:21px;margin:0}
+.featured-jobs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.featured-jobs-grid{grid-template-columns:1fr}}
+
+/* Back to top */
+.back-to-top{position:fixed;left:22px;bottom:22px;z-index:90;width:46px;height:46px;border:0;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;cursor:pointer;box-shadow:0 15px 40px rgba(7,17,31,.2);transition:transform .2s,background .2s}
+.back-to-top:hover{background:var(--orange);transform:translateY(-3px)}
+.back-to-top svg{width:18px;height:18px}
+.back-to-top[hidden]{display:none!important}
+@media(max-width:650px){.back-to-top{left:14px;bottom:14px;width:40px;height:40px}}
+
+/* Footer LinkedIn link */
+.footer-linkedin{display:inline-flex!important;align-items:center;gap:8px}
+.footer-linkedin[hidden]{display:none!important}
+.footer-linkedin-badge{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:5px;background:var(--orange);color:white;font-size:10px;font-weight:800;font-style:normal}
+
 /* Custom scrollbar */
 html{scrollbar-color:var(--ink) #e7e9e4;scrollbar-width:thin}
 ::-webkit-scrollbar{width:11px;height:11px}
