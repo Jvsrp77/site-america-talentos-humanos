@@ -147,3 +147,8 @@ html{scrollbar-color:var(--ink) #e7e9e4;scrollbar-width:thin}
 .cookie-consent p a{color:var(--orange)}
 .cookie-consent>div{display:flex;gap:10px;flex-shrink:0}
 @media(max-width:650px){.cookie-consent{left:14px;right:14px;bottom:14px;padding:16px}.cookie-consent>div{width:100%}.cookie-consent>div .button{flex:1}}
+
+/* Logo real da marca (substitui o ícone + texto) */
+.brand-logo{height:36px;width:auto;display:block;background:#fff;border-radius:10px;padding:7px 12px;box-shadow:0 1px 3px rgba(5,12,23,.12)}
+.footer-grid .brand-logo{height:44px}
+@media(max-width:650px){.brand-logo{height:30px;padding:6px 10px}}

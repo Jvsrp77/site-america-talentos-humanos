@@ -25,3 +25,7 @@
 .search-box span svg{width:15px;height:15px;vertical-align:-3px}
 .refresh-button{display:grid;place-items:center}
 .refresh-button svg{width:16px;height:16px}
+
+/* Logo real da marca */
+.brand-logo{height:36px;width:auto;display:block;background:#fff;border-radius:10px;padding:7px 12px;box-shadow:0 1px 3px rgba(5,12,23,.12)}
+.sidebar .brand-logo{height:30px}
