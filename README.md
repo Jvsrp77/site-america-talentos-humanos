@@ -4,6 +4,8 @@ Site institucional e plataforma de recrutamento da **América Talentos Humanos**
 
 🔗 Site no ar: [americath.com.br](https://americath.com.br)
 
+![Screenshot do site da América Talentos Humanos](screenshot.jpg)
+
 ## O que o projeto faz
 
 - **Site institucional** — apresentação da empresa, soluções de RH, diferenciais e canais de contato (WhatsApp).
