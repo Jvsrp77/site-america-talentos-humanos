@@ -20,3 +20,5 @@
   .detail-layout{grid-template-columns:1fr}
   body{background:white}
 }
+.talent-cta p{color:#4f6158}
+.jobs-page .jobs-nav a,.job-detail-page .jobs-nav a{color:#fff}

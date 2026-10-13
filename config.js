@@ -1,5 +1,5 @@
 window.AMERICA_CONFIG = Object.freeze({
-  siteUrl: "https://calm-toffee-d2644b.netlify.app",
+  siteUrl: "https://americath.com.br",
   whatsappNumber: "5519993618825",
   schedulingUrl: "",
   analyticsId: "",
