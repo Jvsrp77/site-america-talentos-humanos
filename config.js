@@ -2,7 +2,7 @@ window.AMERICA_CONFIG = Object.freeze({
   siteUrl: "https://americath.com.br",
   whatsappNumber: "5519993618825",
   schedulingUrl: "",
-  analyticsId: "",
+  analyticsId: "G-KZH7EZQCZH",
   privacyEmail: "",
   organization: {
     name: "América Talentos Humanos",
